@@ -9,8 +9,15 @@ router.get('/', (req, res, next) =>{
 });
 
 router.post('/', (req, res, next) =>{
+    // Creates an object
+    const driver = {
+        name: req.body.name,
+        location: req.body.location
+    };
+
     res.status(201).json({
-        message: 'Handling POST requests to /products'
+        message: 'Handling POST requests to /products',
+        createdDriver: driver
     });
 });
 

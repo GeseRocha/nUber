@@ -10,9 +10,15 @@ router.get('/', (req, res, next) =>{
 
 // TODO implement method
 router.post('/', (req, res, next) =>{
+
+    const order = {
+        driverId: req.body.driverId
+    }
+
     // Status code 201 means everything went okay and resource was created
     res.status(201).json({
-        message: 'Orders were created'
+        message: 'Orders were created',
+        createdOrder: order
     });
 });
 
