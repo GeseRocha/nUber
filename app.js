@@ -4,10 +4,21 @@ const app = express();
 const morgan = require('morgan');
 // Used to easily parse information
 const bodyParser = require('body-parser');
+// Database
+const mongoose = require('mongoose');
 
 //imports routes to be use
 const driverRoutes = require('./api/routes/drivers');
 const orderRoutes = require('./api/routes/orders');
+
+// Imports database
+mongoose.connect('mongodb+srv://geserocha:'
+    + process.env.MONGO_ATLAS_PW
+    + '@node-rest-nuber-noaag.mongodb.net/test?retryWrites=true',
+    {
+        useNewUrlParser: true
+    });
+
 
 // implements logging for all requests
 app.use(morgan('dev'));

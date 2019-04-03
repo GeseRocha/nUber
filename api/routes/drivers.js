@@ -1,5 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
+
+mongoose.Promise = Promise;
+
+
+const Driver = require('../models/driver');
 
 // Gets sub route '/' and has a handler (function) that returns a json object
 router.get('/', (req, res, next) =>{
@@ -8,12 +14,21 @@ router.get('/', (req, res, next) =>{
     });
 });
 
+// TODO Update location to be given as a google API location
 router.post('/', (req, res, next) =>{
-    // Creates an object
-    const driver = {
+    // Creates an object for database
+    const driver = new Driver ({
+        _id: new mongoose.Types.ObjectId(),
         name: req.body.name,
         location: req.body.location
-    };
+    });
+
+    // Stores to the database and checks for errors
+    driver.save()/*.then(result => {
+        console.log("this went throug")
+        console.log(result)
+    })
+        .catch(err => console.log(err));*/
 
     res.status(201).json({
         message: 'Handling POST requests to /products',
@@ -25,16 +40,9 @@ router.post('/', (req, res, next) =>{
 router.get('/:driverId', (req, res, next) =>{
     const id = req.params.driverId;
 
-    if (id == 'special') {
-        res.status(200).json({
-            message: 'You discovered the special ID',
-            id: id
-        });
-    } else {
-        res.status(200).json({
-            message: 'You passed an ID'
-        });
-    }
+    Driver.findById(id).then(driver)
+
+
 });
 
 // TODO: implement patch function
