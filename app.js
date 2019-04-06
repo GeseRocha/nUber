@@ -12,11 +12,12 @@ const driverRoutes = require('./api/routes/drivers');
 const orderRoutes = require('./api/routes/orders');
 
 // Imports database
-mongoose.connect('mongodb+srv://geserocha:'
-    + process.env.MONGO_ATLAS_PW
-    + '@node-rest-nuber-noaag.mongodb.net/test?retryWrites=true',
+mongoose.connect('mongodb+srv://geserocha:G228349rj%3F@node-rest-nuber-noaag.mongodb.net/test?retryWrites=true',
     {
         useNewUrlParser: true
+    }, (err) => {
+        if (!err) { console.log('MongoDB Connection Succeeded.')}
+        else {console.log('Error in DB connection: ' + err)}
     });
 
 
